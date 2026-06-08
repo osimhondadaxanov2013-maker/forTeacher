@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Funny Teacher Page</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+      }
+
+      .container {
+        text-align: center;
+        color: white;
+      }
+
+      h1 {
+        font-size: 60px;
+        margin-bottom: 50px;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      }
+
+      .buttons {
+        position: relative;
+        width: 600px;
+        height: 300px;
+        margin: auto;
+      }
+
+      button {
+        position: absolute;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 14px;
+        font-size: 24px;
+        cursor: pointer;
+        transition: 0.2s;
+        font-weight: bold;
+      }
+
+      #yesBtn {
+        left: 120px;
+        top: 100px;
+        background: #22c55e;
+        color: white;
+        box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+      }
+
+      #yesBtn:hover {
+        transform: scale(1.1);
+      }
+
+      #noBtn {
+        left: 350px;
+        top: 100px;
+        background: #ef4444;
+        color: white;
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+      }
+
+      .message {
+        margin-top: 40px;
+        font-size: 40px;
+        opacity: 0;
+        transform: scale(0.5);
+        transition: 0.5s;
+      }
+
+      .show {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .emoji {
+        position: fixed;
+        font-size: 30px;
+        animation: fall linear forwards;
+        pointer-events: none;
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(110vh) rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Teacher Siz Eng Yaxshimisz</h1>
+
+      <div class="buttons">
+        <button id="yesBtn">Ha</button>
+        <button id="noBtn">Yo‘q</button>
+      </div>
+
+      <div class="message" id="message">
+        Siz dunyodagi eng zo'r teachersiz ❤️
+      </div>
+    </div>
+
+    <script>
+      const noBtn = document.getElementById("noBtn");
+      const yesBtn = document.getElementById("yesBtn");
+      const message = document.getElementById("message");
+      const container = document.querySelector(".buttons");
+
+
+      container.addEventListener("mousemove", (e) => {
+        const rect = container.getBoundingClientRect();
+
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        const btnX = noBtn.offsetLeft;
+        const btnY = noBtn.offsetTop;
+
+        const distance = Math.sqrt((mouseX - btnX) ** 2 + (mouseY - btnY) ** 2);
+
+        if (distance < 120) {
+          const maxX = container.clientWidth - noBtn.offsetWidth;
+          const maxY = container.clientHeight - noBtn.offsetHeight;
+
+          const randomX = Math.random() * maxX;
+          const randomY = Math.random() * maxY;
+
+          noBtn.style.left = randomX + "px";
+          noBtn.style.top = randomY + "px";
+        }
+      });
+      yesBtn.addEventListener("click", () => {
+        message.classList.add("show");
+
+        document.body.style.background =
+          "linear-gradient(135deg,#7c3aed,#ec4899)";
+
+
+        for (let i = 0; i < 80; i++) {
+          const emoji = document.createElement("div");
+
+          emoji.classList.add("emoji");
+
+          emoji.innerHTML = ["🎉", "🔥", "😍", "😎", "✨"][
+            Math.floor(Math.random() * 5)
+          ];
+
+          emoji.style.left = Math.random() * 100 + "vw";
+
+          emoji.style.top = "-50px";
+
+          emoji.style.animationDuration = Math.random() * 3 + 2 + "s";
+
+          document.body.appendChild(emoji);
+
+          setTimeout(() => {
+            emoji.remove();
+          }, 5000);
+        }
+      });
+    </script>
+  </body>
+</html>
+```
